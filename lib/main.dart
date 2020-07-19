@@ -14,9 +14,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter APP',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.blue[200],
-      ),
+          primarySwatch: Colors.blue,
+          accentColor: Colors.blue[200],
+          fontFamily: 'Quicksand',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                      title: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )))),
       home: MyHomePage(),
     );
   }
