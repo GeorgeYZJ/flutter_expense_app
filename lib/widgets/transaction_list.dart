@@ -11,13 +11,13 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: MediaQuery.of(context).size.height * 0.6,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
                 Text(
                   'No transactions added yet!',
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
                 SizedBox(
                   height: 10,
@@ -51,7 +51,7 @@ class TransactionList extends StatelessWidget {
                     ),
                     title: Text(
                       transactions[index].title,
-                      style: Theme.of(context).textTheme.title,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                     subtitle: Text(
                       DateFormat.yMMMMd().format(transactions[index].date),
