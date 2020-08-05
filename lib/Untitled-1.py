@@ -1,10 +1,10 @@
 import numpy as np
 
 TARGET_PHRASE = 'To be, or not to be, that is the question.'       # target DNA
-POP_SIZE = 1000                      # population size
+POP_SIZE = 900                      # population size
 CROSS_RATE = 0.8                    # mating probability (DNA crossover)
 MUTATION_RATE = 0.001                # mutation probability
-N_GENERATIONS = 10000
+N_GENERATIONS = 1000
 
 DNA_SIZE = len(TARGET_PHRASE)
 TARGET_ASCII = np.fromstring(TARGET_PHRASE, dtype=np.uint8)  # convert string to number
@@ -23,10 +23,10 @@ class GA(object):
         self.pop = np.random.choice(DNA_bound, size=(pop_size, DNA_size)).astype(np.int8) # int8 for convert to ASCII
 
     def translateDNA(self, DNA):                 # convert to readable string
-        return DNA.tobytes().decode('ascii')
+        return DNA.tostring().decode('ascii')
 
     def get_fitness(self):                      # count how many character matches
-        match_count = (self.pop == TARGET_ASCII).sum(axis=1)
+        match_count = (self.pop == TARGET_ASCII).sum(axis=1) # axis =1 count the sum of the row
         return match_count
 
     def select(self):
@@ -37,7 +37,7 @@ class GA(object):
     def crossover(self, parent, pop):
         if np.random.rand() < self.cross_rate:
             i_ = np.random.randint(0, self.pop_size, size=1)                        # select another individual from pop
-            cross_points = np.random.randint(0, 2, self.DNA_size).astype(np.bool)   # choose crossover points
+            cross_points = np.random.randint(0, 2, size = self.DNA_size).astype(np.bool)   # choose crossover points
             parent[cross_points] = pop[i_, cross_points]                            # mating and produce one child
         return parent
 
